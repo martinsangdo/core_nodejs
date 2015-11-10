@@ -3,6 +3,7 @@
 # node1
 1) Make virtual server/domain
 2) Connect to database mongodb
+
 3) Change port: modify in app.js (app.set('port', process.env.PORT || 3001);)
 
 ## Usage
