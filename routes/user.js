@@ -3,6 +3,7 @@
  * GET users listing.
  */
 var User = require('../models/user.js');
+var Test = require('../models/test.js');
 
 
 exports.list = function(req, res){
@@ -25,7 +26,7 @@ exports.getuser = function(req, res){
 	});
 	*/
 	// get all the users
-	User.find({}, function(err, users) {
+	Test.find({}, function(err, users) {
 	  if (err) throw err;
 
 	  // object of all the users
