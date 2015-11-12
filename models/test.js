@@ -5,6 +5,7 @@ var Schema = mongoose.Schema;
 //create a schema
 var testSchema = new Schema({
 id: Number,
+userId: { type: Number, ref: 'User' },
 name: String
 }, { collection: 'test1' });
 
