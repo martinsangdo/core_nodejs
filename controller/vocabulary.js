@@ -4,13 +4,11 @@ const Common = require("../common/common");
 const common = new Common();
 const Vocabulary = require("../models/Vocabulary");
 
-const request = require('request');
+exports.index = function(req, res){
+    res.render('vocabulary', { title: 'Express' });
+};
 
-const {
-    load_next
-} = require("../controller/vocabulary");
-//
-router.get("/load_next", function (req, res, next) {
+exports.load_next = (req, res) => {
     Vocabulary.findOne({is_read: {$ne: false}}, '', (err, doc) => {
         if (err || !doc) {
             return res.rest.success(
@@ -19,7 +17,4 @@ router.get("/load_next", function (req, res, next) {
         }
         return res.rest.success(doc);
     });
-});
-
-//======
-module.exports = router;
+};

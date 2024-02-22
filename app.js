@@ -11,6 +11,8 @@ var express = require('express')
   , http = require('http')
   , path = require('path');
 
+var restResponse = require('express-rest-response');
+
 var app = express();
 
 var DB_URL = "mongodb://localhost:27017/martin_projects";
@@ -24,6 +26,13 @@ connect();
 
 mongoose.connection.on('error', console.log);
 mongoose.connection.on('disconnected', connect);
+
+//========== define Rest response
+var rest_resp_options = {
+  showStatusCode: true,
+  showDefaultMessage: true
+};
+app.use(restResponse(rest_resp_options));
 
 // all environments
 app.set('port', process.env.PORT || 3001);		//3000 default port
@@ -41,9 +50,10 @@ if ('development' == app.get('env')) {
   app.use(express.errorHandler());
 }
 
-app.get('/', routes.index);
+// app.use('/', routes);
+// app.get('/', routes.index);
 app.get('/users', user.getuser);
-app.get('/vocabulary', vocabulary.index);
+app.get('/vocabulary', vocabulary);
 
 http.createServer(app).listen(app.get('port'), function(){
   console.log('Express server listening on port ' + app.get('port'));
